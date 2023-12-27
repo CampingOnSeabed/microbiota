@@ -1,0 +1,13 @@
+species_accumulation curve
+install.packages("vegan")  # 安装vegan包
+library(vegan)  # 加载vegan包
+require(vegan)
+otu <- read.table("ASV_table_jilei.txt", header = T,
+                  sep = "\t",row.names=1)
+all <- specaccum(otu, method = "random")  
+png(file = "spe.png", h = 2000, w = 2000, res = 300)
+plot(all, ci.type = "poly", col = "blue", lwd = 2, ci.lty = 0,
+     ci.col = "lightblue", main = "Species Accumulation Curves", xlab = "Number of samples",
+     ylab = "Number of  species")
+boxplot(all, col = "yellow", add = TRUE, pch = "+", range = 3.5)
+dev.off()
